@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSS 2D 3D变换动画</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif
+        }
+
+        body {
+            background: #f5f7fa;
+            padding: 30px 20px;
+            max-width: 1200px;
+            margin: 0 auto
+        }
+
+        .title {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 40px;
+            color: #333
+        }
+
+        .item {
+            display: flex;
+            flex-direction: column;
+            gap: 10px
+        }
+
+        .wrap {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px
+        }
+
+        .box {
+            height: 180px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.6s ease
+        }
+
+        .label {
+            text-align: center;
+            font-size: 14px;
+            color: #333;
+            padding: 6px 10px;
+            background: #fff;
+            border-radius: 8px
+        }
+
+        .box-2d-rotate:hover {
+            transform: rotate(360deg)
+        }
+
+        .box-2d-translate:hover {
+            transform: translate(-20px, -20px)
+        }
+
+        .box-2d-scale:hover {
+            transform: scale(1.2)
+        }
+
+        .box-2d-all:hover {
+            transform: translate(10px, -10px) rotate(15deg) scale(1.1)
+        }
+
+        .scene {
+            perspective: 800px
+        }
+
+        .box-3d-rotatex:hover {
+            transform: rotateX(60deg)
+        }
+
+        .box-3d-rotatey:hover {
+            transform: rotateY(60deg)
+        }
+
+        .box-3d-rotatez:hover {
+            transform: rotateZ(45deg)
+        }
+
+        .box-3d-transz:hover {
+            transform: translateZ(100px)
+        }
+
+        .box-3d-all:hover {
+            transform: translateZ(60px) rotateX(30deg) rotateY(30deg)
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="title">CSS 2D & 3D变换动画</h1>
+    <div class="wrap">
+
+        <div class="item">
+            <div class="box box-2d-rotate">2D旋转</div>
+            <div class="label">transform: rotate(360deg)</div>
+        </div>
+
+        <div class="item">
+            <div class="box box-2d-translate">2D平移</div>
+            <div class="label">transform: translate(-20px, -20px)</div>
+        </div>
+
+        <div class="item">
+            <div class="box box-2d-scale">2D缩放</div>
+            <div class="label">transform: scale(1.2)</div>
+        </div>
+
+        <div class="item">
+            <div class="box box-2d-all">2D组合</div>
+            <div class="label">transform: translate(10px,-10px) rotate(15deg) scale(1.1)</div>
+        </div>
+
+        <div class="item">
+            <div class="scene">
+                <div class="box box-3d-rotatex">3D X轴旋转</div>
+            </div>
+            <div class="label">transform: rotateX(60deg)</div>
+        </div>
+
+        <div class="item">
+            <div class="scene">
+                <div class="box box-3d-rotatey">3D Y轴旋转</div>
+            </div>
+            <div class="label">transform: rotateY(60deg)</div>
+        </div>
+
+        <div class="item">
+            <div class="scene">
+                <div class="box box-3d-rotatez">3D Z轴旋转</div>
+            </div>
+            <div class="label">transform: rotateZ(45deg)</div>
+        </div>
+
+        <div class="item">
+            <div class="scene">
+                <div class="box box-3d-transz">3D Z轴平移</div>
+            </div>
+            <div class="label">transform: translateZ(100px)</div>
+        </div>
+
+        <div class="item">
+            <div class="scene">
+                <div class="box box-3d-all">3D组合</div>
+            </div>
+            <div class="label">transform: translateZ(60px) rotateX(30deg) rotateY(30deg)</div>
+        </div>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CSS 缓动曲线动画演示</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f1f5f9;
+      min-height: 100vh;
+      padding: 60px 20px;
+      font-family: system-ui, sans-serif;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 12px 40px rgba(0, 30, 80, 0.06);
+      padding: 60px 50px;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 32px;
+      color: #1e293b;
+      margin-bottom: 50px;
+      font-weight: 700;
+    }
+
+    .easing-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 36px 40px;
+    }
+
+    .easing-item {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .easing-label {
+      width: 160px;
+      text-align: right;
+      font-size: 16px;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .track {
+      flex: 1;
+      height: 42px;
+      background: #f8fafc;
+      border-radius: 21px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #cbd5e1;
+    }
+
+    .bezier {
+      font-family: monospace;
+      font-size: 13px;
+      color: #64748b;
+      text-align: right;
+      padding-right: 8px;
+    }
+
+    .ball {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3b82f6, #6366f1);
+      box-shadow: 0 0 16px rgba(59, 130, 246, 0.35);
+      animation: run 3s infinite alternate;
+    }
+
+    @keyframes run {
+      0% {
+        left: 0;
+        transform: translateY(-50%) scale(0.9);
+      }
+
+      100% {
+        left: calc(100% - 40px);
+        transform: translateY(-50%) scale(0.9);
+      }
+    }
+
+    .ball.linear {
+      animation-timing-function: linear;
+    }
+
+    .ball.ease {
+      animation-timing-function: ease;
+    }
+
+    .ball.ease-in {
+      animation-timing-function: ease-in;
+    }
+
+    .ball.ease-out {
+      animation-timing-function: ease-out;
+    }
+
+    .ball.ease-in-out {
+      animation-timing-function: ease-in-out;
+    }
+
+    .ball.smooth {
+      animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    .ball.bounce-out {
+      animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+
+    .ball.bounce-in {
+      animation-timing-function: cubic-bezier(0.36, 0, 0.66, -0.56);
+    }
+
+    .ball.fast-out {
+      animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
+    }
+
+    .ball.strong-in {
+      animation-timing-function: cubic-bezier(0.7, 0, 0.84, 0);
+    }
+
+    .ball.strong-out {
+      animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .ball.smooth-in-out {
+      animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .ball.snappy {
+      animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+    }
+
+    .ball.soft-in-out {
+      animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+    }
+
+    .ball.elastic-out {
+      animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    }
+
+    .ball.soft-in {
+      animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .ball.soft-out {
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .ball.hard-in-out {
+      animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .ball.anticipate {
+      animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .ball.decelerate {
+      animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="title">CSS 缓动速度曲线对比</div>
+    <div class="easing-list">
+
+      <div class="easing-item">
+        <div class="row">
+          <div class="easing-label">linear</div>
+          <div class="track">
+            <div class="ball linear"></div>
+          </div>
+        </div>
+        <div class="bezier">linear</div>
+      </div>
+
+      <div class="easing-item">
+        <div class="row">
+          <div class="easing-label">ease</div>
+          <div class="track">
+            <div class="ball ease"></div>
+          </div>
+        </div>
+        <div class="bezier">ease</div>
+      </div>
+
+      <div class="easing-item">
+        <div class="row">
+          <div class="easing-label">ease-in</div>
+          <div class="track">
+            <div class="ball ease-in"></div>
+          </div>
+        </div>
+        <div class="bezier">ease-in</div>
+      </div>
+
+      <div class="easing-item">
+        <div class="row">
+          <div class="easing-label">ease-out</div>
+          <div class="track">
+            <div class="ball ease-out"></div>
+          </div>
+        </div>
+        <div class="bezier">ease-out</div>
+      </div>
+
+      <div class="easing-item">
+        <div class="row">
+          <div class="easing-label">ease-in-out</div>
+          <div class="track">
+            <div class="ball ease-in-out"></div>
+          </div>
+        </div>
+        <div class="bezier">ease-in-out</div>
+      </div>
+
+      <div class="easing-item">
+        <div class="row">
+          <div class="easing-label">smooth</div>
+          <div class="track">
+            <div class="ball smooth"></div>
+          </div>
+        </div>
+        <div class="bezier">cubic-bezier(0.25, 0.1, 0.25, 1)</div>
+      </div>
+
+      <div class="easing-item">
+        <div class="row">
+          <div class="easing-label">bounce-in</div>
+          <div class="track">
+            <div class="ball bounce-in"></div>
+          </div>
+        </div>
+        <div class="bezier">cubic-bezier(0.36, 0, 0.66, -0.56)</div>
+      </div>
+
+      <div class="easing-item">
+        <div class="row">
+          <div class="easing-label">bounce-out</div>
+          <div class="track">
+            <div class="ball bounce-out"></div>
+          </div>
+        </div>
+        <div class="bezier">cubic-bezier(0.68, -0.55, 0.27, 1.55)</div>
+      </div>
+
+      <div class="easing-item">
+        <div class="row">
+          <div class="easing-label">fast-out</div>
+          <div class="track">
+            <div class="ball fast-out"></div>
+          </div>
+        </div>
+        <div class="bezier">cubic-bezier(0.1, 0.9, 0.2, 1)</div>
+      </div>
+
+      <div class="easing-item">
+        <div class="row">
+          <div class="easing-label">strong-in</div>
+          <div class="track">
+            <div class="ball strong-in"></div>
+          </div>
+        </div>
+        <div class="bezier">cubic-bezier(0.7, 0, 0.84, 0)</div>
+      </div>
+
+      <div class="easing-item">
+        <div class="row">
+          <div class="easing-label">strong-out</div>
+          <div class="track">
+            <div class="ball strong-out"></div>
+          </div>
+        </div>
+        <div class="bezier">cubic-bezier(0.16, 1, 0.3, 1)</div>
+      </div>
+
+      <div class="easing-item">
+        <div class="row">
+          <div class="easing-label">smooth-in-out</div>
+          <div class="track">
+            <div class="ball smooth-in-out"></div>
+          </div>
+        </div>
+        <div class="bezier">cubic-bezier(0.4, 0, 0.2, 1)</div>
+      </div>
+
+      <div class="easing-item">
+        <div class="row">
+          <div class="easing-label">snappy</div>
+          <div class="track">
+            <div class="ball snappy"></div>
+          </div>
+        </div>
+        <div class="bezier">cubic-bezier(0.33, 1, 0.68, 1)</div>
+      </div>
+
+      <div class="easing-item">
+        <div class="row">
+          <div class="easing-label">soft-in-out</div>
+          <div class="track">
+            <div class="ball soft-in-out"></div>
+          </div>
+        </div>
+        <div class="bezier">cubic-bezier(0.5, 0, 0.5, 1)</div>
+      </div>
+
+      <div class="easing-item">
+        <div class="row">
+          <div class="easing-label">elastic-out</div>
+          <div class="track">
+            <div class="ball elastic-out"></div>
+          </div>
+        </div>
+        <div class="bezier">cubic-bezier(0.5, 1, 0.89, 1)</div>
+      </div>
+
+      <div class="easing-item">
+        <div class="row">
+          <div class="easing-label">soft-in</div>
+          <div class="track">
+            <div class="ball soft-in"></div>
+          </div>
+        </div>
+        <div class="bezier">cubic-bezier(0.34, 1.56, 0.64, 1)</div>
+      </div>
+
+      <div class="easing-item">
+        <div class="row">
+          <div class="easing-label">soft-out</div>
+          <div class="track">
+            <div class="ball soft-out"></div>
+          </div>
+        </div>
+        <div class="bezier">cubic-bezier(0.22, 1, 0.36, 1)</div>
+      </div>
+
+      <div class="easing-item">
+        <div class="row">
+          <div class="easing-label">hard-in-out</div>
+          <div class="track">
+            <div class="ball hard-in-out"></div>
+          </div>
+        </div>
+        <div class="bezier">cubic-bezier(0.19, 1, 0.22, 1)</div>
+      </div>
+
+      <div class="easing-item">
+        <div class="row">
+          <div class="easing-label">anticipate</div>
+          <div class="track">
+            <div class="ball anticipate"></div>
+          </div>
+        </div>
+        <div class="bezier">cubic-bezier(0.34, 1.56, 0.64, 1)</div>
+      </div>
+
+      <div class="easing-item">
+        <div class="row">
+          <div class="easing-label">decelerate</div>
+          <div class="track">
+            <div class="ball decelerate"></div>
+          </div>
+        </div>
+        <div class="bezier">cubic-bezier(0.075, 0.82, 0.165, 1)</div>
+      </div>
+
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Animation</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Microsoft YaHei", sans-serif;
+    }
+
+    body {
+      background: #f7f8fa;
+      padding: 30px 20px;
+    }
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 32px;
+      color: #222;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      font-size: 18px;
+      margin-bottom: 40px;
+    }
+
+    .rule {
+      background: #2d3748;
+      color: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      font-family: monospace;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .section {
+      background: #fff;
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .section h2 {
+      font-size: 22px;
+      color: #333;
+      margin-bottom: 20px;
+      border-left: 5px solid #409eff;
+      padding-left: 12px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .card h3 {
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .card code {
+      display: block;
+      background: #f8f9fa;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #c50;
+      margin-bottom: 15px;
+    }
+
+    .show {
+      width: 100%;
+      height: 140px;
+      background: #f0f7ff;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      background: #409eff;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    @keyframes move {
+      0% {
+        transform: translateX(-100px);
+      }
+
+      100% {
+        transform: translateX(100px);
+      }
+    }
+
+    /* 动画时长 */
+    .t1 {
+      animation: move 1s linear infinite;
+    }
+
+    .t2 {
+      animation: move 3s linear infinite;
+    }
+
+    .t3 {
+      animation: move 5s linear infinite;
+    }
+
+    /* 速度曲线 */
+    .ease {
+      animation: move 2s ease infinite;
+    }
+
+    .linear {
+      animation: move 2s linear infinite;
+    }
+
+    .in {
+      animation: move 2s ease-in infinite;
+    }
+
+    .out {
+      animation: move 2s ease-out infinite;
+    }
+
+    .inout {
+      animation: move 2s ease-in-out infinite;
+    }
+
+    /* 延迟 */
+    .d0 {
+      animation: move 2s linear infinite;
+    }
+
+    .d1 {
+      animation: move 2s 1s linear infinite;
+    }
+
+    .d2 {
+      animation: move 2s 2s linear infinite;
+    }
+
+    /* 循环次数 */
+    .i1 {
+      animation: move 2s linear 1;
+    }
+
+    .i3 {
+      animation: move 2s linear 3;
+    }
+
+    .loop {
+      animation: move 2s linear infinite;
+    }
+
+    /* 动画方向 */
+    .normal {
+      animation: move 2s linear infinite normal;
+    }
+
+    .reverse {
+      animation: move 2s linear infinite reverse;
+    }
+
+    .alter {
+      animation: move 2s linear infinite alternate;
+    }
+
+    .alter-rev {
+      animation: move 2s linear infinite alternate-reverse;
+    }
+
+    /* 结束状态 */
+    .fnone {
+      animation: move 2s linear none;
+    }
+
+    .forward {
+      animation: move 2s linear forwards;
+    }
+
+    .backward {
+      animation: move 2s linear backwards;
+    }
+
+    .fboth {
+      animation: move 2s linear both;
+    }
+
+    /* 实时控制 */
+    .control {
+      background: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    }
+
+    .control h2 {
+      margin-bottom: 25px;
+    }
+
+    .ctrl-item {
+      display: flex;
+      align-items: center;
+      margin: 14px 0;
+      gap: 12px;
+    }
+
+    .ctrl-item label {
+      width: 140px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .ctrl-item input[type="range"] {
+      flex: 1;
+    }
+
+    .ctrl-item select {
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+    }
+
+    .demo-box {
+      width: 120px;
+      height: 120px;
+      background: #42b983;
+      border-radius: 12px;
+      margin: 30px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .css-code {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      font-family: monospace;
+      color: #c50;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrap">
+    <h1 class="title">CSS Animation</h1>
+    <p class="subtitle">animation: 名称 | 时长 | 速度曲线 | 延迟 | 次数 | 方向 | 结束状态</p>
+
+    <div class="rule">
+      @keyframes move {<br>
+      &nbsp;&nbsp;0% { transform: translateX(-100px); }<br>
+      &nbsp;&nbsp;100% { transform: translateX(100px); }<br>
+      }
+    </div>
+
+    <!-- 动画时长 -->
+    <div class="section">
+      <h2>1️⃣ 动画时长（animation-duration）</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>1秒（快）</h3>
+          <code>animation: move 1s linear infinite;</code>
+          <div class="show">
+            <div class="box t1">1s</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>3秒（中）</h3>
+          <code>animation: move 3s linear infinite;</code>
+          <div class="show">
+            <div class="box t2">3s</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>5秒（慢）</h3>
+          <code>animation: move 5s linear infinite;</code>
+          <div class="show">
+            <div class="box t3">5s</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 速度曲线 -->
+    <div class="section">
+      <h2>2️⃣ 速度曲线（animation-timing-function）</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>ease 默认</h3>
+          <code>animation: move 2s ease infinite;</code>
+          <div class="show">
+            <div class="box ease">ease</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>linear 匀速</h3>
+          <code>animation: move 2s linear infinite;</code>
+          <div class="show">
+            <div class="box linear">linear</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>ease-in 慢进</h3>
+          <code>animation: move 2s ease-in infinite;</code>
+          <div class="show">
+            <div class="box in">ease-in</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>ease-out 慢出</h3>
+          <code>animation: move 2s ease-out infinite;</code>
+          <div class="show">
+            <div class="box out">ease-out</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>ease-in-out 慢进慢出</h3>
+          <code>animation: move 2s ease-in-out infinite;</code>
+          <div class="show">
+            <div class="box inout">in-out</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 延迟 -->
+    <div class="section">
+      <h2>3️⃣ 延迟时间（animation-delay）</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>无延迟</h3>
+          <code>animation: move 2s 0s linear infinite;</code>
+          <div class="show">
+            <div class="box d0">0s</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>延迟1秒</h3>
+          <code>animation: move 2s 1s linear infinite;</code>
+          <div class="show">
+            <div class="box d1">1s</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>延迟2秒</h3>
+          <code>animation: move 2s 2s linear infinite;</code>
+          <div class="show">
+            <div class="box d2">2s</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 循环次数 -->
+    <div class="section">
+      <h2>4️⃣ 循环次数（animation-iteration-count）</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>播放1次</h3>
+          <code>animation: move 2s linear 1;</code>
+          <div class="show">
+            <div class="box i1">1次</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>播放3次</h3>
+          <code>animation: move 2s linear 3;</code>
+          <div class="show">
+            <div class="box i3">3次</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>无限循环</h3>
+          <code>animation: move 2s linear infinite;</code>
+          <div class="show">
+            <div class="box loop">无限</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 动画方向 -->
+    <div class="section">
+      <h2>5️⃣ 动画方向（animation-direction）</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>normal 正常</h3>
+          <code>animation: move 2s linear infinite normal;</code>
+          <div class="show">
+            <div class="box normal">正常</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>reverse 反向</h3>
+          <code>animation: move 2s linear infinite reverse;</code>
+          <div class="show">
+            <div class="box reverse">反向</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>alternate 往返</h3>
+          <code>animation: move 2s linear infinite alternate;</code>
+          <div class="show">
+            <div class="box alter">往返</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>alternate-reverse 反向往返</h3>
+          <code>animation: move 2s linear infinite alternate-reverse;</code>
+          <div class="show">
+            <div class="box alter-rev">反向往返</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 结束状态 -->
+    <div class="section">
+      <h2>6️⃣ 结束状态（animation-fill-mode）</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>none 回到原点</h3>
+          <code>animation: move 2s linear none;</code>
+          <div class="show">
+            <div class="box fnone">none</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>forwards 停终点</h3>
+          <code>animation: move 2s linear forwards;</code>
+          <div class="show">
+            <div class="box forward">forwards</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>backwards 停起点</h3>
+          <code>animation: move 2s linear backwards;</code>
+          <div class="show">
+            <div class="box backward">backwards</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>both 双向</h3>
+          <code>animation: move 2s linear both;</code>
+          <div class="show">
+            <div class="box fboth">both</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 实时控制面板 -->
+    <!-- <div class="control">
+    <h2>🎛️ 实时调节所有属性（教学演示）</h2>
+    <div class="ctrl-item">
+      <label>时长(s)</label>
+      <input type="range" id="dur" min="0.5" max="5" step="0.1" value="2">
+      <span id="durText">2s</span>
+    </div>
+    <div class="ctrl-item">
+      <label>延迟(s)</label>
+      <input type="range" id="delay" min="0" max="3" step="0.1" value="0">
+      <span id="delayText">0s</span>
+    </div>
+    <div class="ctrl-item">
+      <label>速度曲线</label>
+      <select id="timing">
+        <option value="linear">linear</option>
+        <option value="ease" selected>ease</option>
+        <option value="ease-in">ease-in</option>
+        <option value="ease-out">ease-out</option>
+        <option value="ease-in-out">ease-in-out</option>
+      </select>
+    </div>
+    <div class="ctrl-item">
+      <label>循环次数</label>
+      <select id="count">
+        <option value="1">1次</option>
+        <option value="3">3次</option>
+        <option value="infinite" selected>无限</option>
+      </select>
+    </div>
+    <div class="ctrl-item">
+      <label>动画方向</label>
+      <select id="dir">
+        <option value="normal" selected>normal</option>
+        <option value="reverse">reverse</option>
+        <option value="alternate">alternate</option>
+        <option value="alternate-reverse">alternate-reverse</option>
+      </select>
+    </div>
+    <div class="ctrl-item">
+      <label>结束状态</label>
+      <select id="fill">
+        <option value="none" selected>none</option>
+        <option value="forwards">forwards</option>
+        <option value="backwards">backwards</option>
+        <option value="both">both</option>
+      </select>
+    </div>
+    <div class="demo-box" id="demo">实时演示</div>
+    <div class="css-code" id="css"></div>
+  </div> -->
+  </div>
+
+  <script>
+    const demo = document.getElementById('demo');
+    const css = document.getElementById('css');
+    const dur = document.getElementById('dur');
+    const delay = document.getElementById('delay');
+    const timing = document.getElementById('timing');
+    const count = document.getElementById('count');
+    const dir = document.getElementById('dir');
+    const fill = document.getElementById('fill');
+    const durText = document.getElementById('durText');
+    const delayText = document.getElementById('delayText');
+
+    function update() {
+      const d = dur.value;
+      const de = delay.value;
+      const t = timing.value;
+      const c = count.value;
+      const di = dir.value;
+      const f = fill.value;
+
+      durText.textContent = d + 's';
+      delayText.textContent = de + 's';
+
+      const ani = `move ${d}s ${t} ${de}s ${c} ${di} ${f}`;
+      demo.style.animation = ani;
+      css.textContent = `animation: ${ani};`;
+    }
+
+    dur.oninput = update;
+    delay.oninput = update;
+    timing.onchange = update;
+    count.onchange = update;
+    dir.onchange = update;
+    fill.onchange = update;
+    update();
+  </script>
+
+</body>
+
+</html>

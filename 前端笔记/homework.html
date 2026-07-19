@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图书管理系统</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background: #f5f5f5;
+        padding: 40px 20px;
+      }
+      .container {
+        max-width: 500px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+      }
+      input,
+      button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+      }
+      button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      button:hover {
+        opacity: 0.8;
+      }
+      .btn-random {
+        background-color: #2196f3;
+      }
+      .delete-btn {
+        background-color: #f44336;
+        width: auto;
+        padding: 5px 12px;
+        margin-left: 10px;
+      }
+      ul {
+        list-style: none;
+        margin-top: 20px;
+      }
+      li {
+        background: #f9f9f9;
+        padding: 12px;
+        margin-bottom: 8px;
+        border-radius: 6px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .empty-tip {
+        text-align: center;
+        color: #999;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>图书管理系统 - 学生作业</h2>
+      <p
+        style="
+          color: #666;
+          font-size: 12px;
+          text-align: center;
+          margin-bottom: 16px;
+        "
+      >
+        任务：完成三个数组操作函数（添加、删除、随机推荐）
+      </p>
+
+      <input type="text" id="bookName" placeholder="书名 *" />
+      <input type="text" id="author" placeholder="作者" />
+      <input type="text" id="year" placeholder="出版年份" />
+
+      <button onclick="addBook()">添加图书</button>
+      <button onclick="randomRecommend()" class="btn-random">随机推荐</button>
+
+      <ul id="bookList"></ul>
+    </div>
+
+    <script>
+      // 图书数据数组（用来存储所有图书）
+      let books = [];
+
+      // 取页面元素
+      const bookName = document.getElementById("bookName");
+      const author = document.getElementById("author");
+      const year = document.getElementById("year");
+      const bookList = document.getElementById("bookList");
+
+      // ============================================
+      //         作业任务 1：完成渲染图书列表函数
+      // ============================================
+      // 功能说明：
+      //   1. 判断 books 数组是否为空
+      //      - 如果为空，将 bookList.innerHTML 设置为 '<li class="empty-tip">暂无图书，添加一本吧~</li>'
+      //      - 然后 return 结束函数
+      //   2. 如果数组不为空，使用 map 和 join 生成列表 HTML
+      //      - 使用 books.map() 遍历数组，将每本图书转换为 <li> 标签
+      //      - map 的回调函数接收两个参数：(book, index)
+      //      - 生成的 li 标签格式如下：
+      //        <li>
+      //          <span>
+      //            <strong>《书名》</strong>
+      //             - 作者（如果有）
+      //             (年份)（如果有）
+      //          </span>
+      //          <button class="delete-btn" onclick="removeBook(索引)">删除</button>
+      //        </li>
+      //      - 使用 .join("") 将 map 返回的数组拼接成字符串
+      //      - 将拼接好的字符串赋值给 bookList.innerHTML
+      // ============================================
+      function render() {
+        // TODO: 请在这里完成渲染图书列表的代码
+      }
+
+      // ============================================
+      //         作业任务 2：完成添加图书函数
+      // ============================================
+      // 功能说明：
+      //   1. 获取书名输入框，作者输入框和年份输入框的值（使用 XXX.value）
+      //   2. 使用 .trim() 方法去除空格
+      //   3. 判断书名是否为空，如果为空则 alert("请填写书名") 并 return
+      //   4. 将新图书添加到 books 数组中（每本图书是一个对象，包含 name, author, year 三个属性）
+      //   5. 清空三个输入框的值（设置为空字符串）
+      //   6. 刷新列表
+      // ============================================
+      function addBook() {
+        // TODO: 请在这里完成添加图书的代码
+      }
+
+      // ============================================
+      //      作业任务 3：完成删除图书函数
+      // ============================================
+      // 功能说明：
+      //   1. 函数接收一个参数 index（表示要删除的图书在数组中的位置）
+      //   2. 使用数组的 splice() 方法删除指定位置的图书
+      //   3. 刷新列表
+      // ============================================
+      function removeBook(index) {
+        // TODO: 请在这里完成删除图书的代码
+      }
+
+      // ============================================
+      //        作业任务 4：完成随机推荐函数
+      // ============================================
+      // 功能说明：
+      //   1. 判断 books 数组是否为空
+      //   2. 生成随机索引：Math.random()
+      //   3. 根据随机索引从 books 数组中获取对应的图书对象
+      //   4. 使用 alert() 弹出推荐信息，格式如下：
+      //      `随机推荐：\n\n书名：《${book.name}》\n作者：${book.author}\n年份：${book.year}`
+      // ============================================
+      function randomRecommend() {
+        // TODO: 请在这里完成随机推荐的代码
+      }
+
+      // 初始化
+      render();
+    </script>
+  </body>
+</html>

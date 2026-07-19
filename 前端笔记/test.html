@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex + margin-auto 灵活布局</title>
+    <style>
+        .container {
+            width: 90%;
+            height: 300px;
+            border: 1px solid black;
+            border-radius: 20px;
+            margin: 20px auto;
+            box-sizing: border-box;
+            padding: 0 20px;
+
+            display: flex;
+            align-items: center;      
+            gap: 20px;            
+            flex-wrap: wrap;         
+        }
+        
+        .box {
+            width: 50px;
+            height: 80px;
+            background-color: brown;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* 方案1：让第2个元素占据剩余空间，把3推到最后 */
+        .box:nth-child(2) {
+            margin-left: auto;
+        }
+
+
+    </style>
+</head>
+<body>
+    <h3>方案1：中间元素 margin-right: auto → 占据中间剩余空间，把3推到最右侧</h3>
+    <div class="container">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+    </div>
+
+    <h3>核心原理解释：</h3>
+    <ul>
+        <li><code>margin-left: auto</code> → 吃掉左侧所有剩余空间，元素被推到最右侧</li>
+        <li><code>margin-right: auto</code> → 吃掉右侧所有剩余空间，元素被推到最左侧</li>
+        <li><code>margin: auto</code> → 同时吃掉左右空间，实现水平居中（在flex中配合margin: 0 auto）</li>
+        <li><strong>关键</strong>：auto 会吸收 flex 容器中<strong>未被占满的所有剩余空间</strong></li>
+    </ul>
+</body>
+</html>
